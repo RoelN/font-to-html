@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Font to HTML</title>
+  <style>
+  @font-face {
+    font-family: test;
+    src: url({fontfile});
+  }
+  .font {
+    font-family: test, monospace;
+    font-size: 3rem;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(3.75rem, 1fr));
+    column-gap: 1rem;
+    row-gap: 1rem;
+  }
+  </style>
+</head>
+<body>
+  {stats}
+  <div class="grid font">
+    {content}
+  </div>
+</body>
+</html>

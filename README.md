@@ -20,6 +20,8 @@ Extra optional flags:
 - `-t my-template.html` to use different HTML template
 - `-w '<p>{char}</p>'` to pass different HTML wrapper for each character
 
+There's a 40 second demo [tweetered right here](https://twitter.com/PixelAmbacht/status/1178967488157159425)!
+
 ## It worksn't!
 
 Any problems? Open an [issue](https://github.com/RoelN/font-to-html/issues) or ping me over at [Twitter](https://twitter.com/pixelambacht)!

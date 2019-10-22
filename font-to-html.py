@@ -34,6 +34,7 @@ def get_cmap_chars(font, wrapper):
 def get_gsub_chars(font, wrapper):
 	"""Get all ligature sequences in the font."""
 	chars = ''
+	count = 0
 	if 'GSUB' in font:
 		table = font['GSUB'].table
 		if table.LookupList:
@@ -44,17 +45,22 @@ def get_gsub_chars(font, wrapper):
 						ligatures = st.ligatures
 						for first_char in ligatures:
 							for ligature in ligatures[first_char]:
+								count += 1
 								char = get_unicode_value(first_char, font)
 								sequence = wrap(char, '&#{char};')
-
 								for following_char in ligature.Component:
 									char = get_unicode_value(
 										following_char, font)
 									sequence += wrap(char, '&#{char};')
-
 								chars += wrap(sequence, wrapper)
-						return chars, len(ligatures)
-	return "", 0
+
+						# Do some highly sophisticated sorting
+						c = chars.splitlines()
+						c.sort()
+						chars = '\n'.join(c)
+
+			return chars, count
+	return '', 0
 
 
 def main():
@@ -66,7 +72,7 @@ def main():
 	parser.add_argument(
 		'-t', '--template', help='HTML template', default='template.html')
 	parser.add_argument(
-		'-w', '--wrapper', help='HTML string to wrap char in', default='<div>{char}</div>')
+		'-w', '--wrapper', help='HTML string to wrap char in', default='<div>{char}</div>\n')
 	args = parser.parse_args()
 
 	font = ttLib.TTFont(args.input)
